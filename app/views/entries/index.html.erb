@@ -1,0 +1,47 @@
+<div class="page-header">
+  <div>
+    <h1 class="page-title">History</h1>
+    <p class="page-subtitle">All your fragrance entries</p>
+  </div>
+  <%= link_to "+ Add Entry", new_entry_path, class: "btn btn-primary" %>
+</div>
+
+<div class="card">
+  <% if @entries.any? %>
+    <div class="entries-list">
+      <% @entries.each do |entry| %>
+        <div class="entry-row">
+          <div class="entry-info">
+            <p class="entry-name"><%= entry.fragrance_name %></p>
+            <p class="entry-meta">
+              <%= entry.worn_on.strftime("%Y-%m-%d") %>
+              <% if entry.occasion.present? %>
+                <span class="dot">•</span> <%= entry.occasion %>
+              <% end %>
+              <% if entry.brand.present? %>
+                <span class="dot">•</span> <%= entry.brand %>
+              <% end %>
+            </p>
+            <% if entry.notes.present? %>
+              <p class="entry-notes"><%= entry.notes %></p>
+            <% end %>
+          </div>
+          <div class="entry-right">
+            <div class="entry-strength">
+              <p class="strength-label">Strength</p>
+              <p class="strength-value"><%= entry.strength %>/10</p>
+            </div>
+            <div class="entry-actions">
+              <%= link_to "Edit", edit_entry_path(entry), class: "action-link" %>
+              <%= link_to "Delete", entry_path(entry), data: { turbo_method: :delete, turbo_confirm: "Delete this entry?" }, class: "action-link danger" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <p>No entries yet. <%= link_to "Add your first fragrance!", new_entry_path %></p>
+    </div>
+  <% end %>
+</div>
