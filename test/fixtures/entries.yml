@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fragrance_name: MyString
+  brand: MyString
+  occasion: MyString
+  strength: 1
+  notes: MyText
+  worn_on: 2026-03-31
+
+two:
+  fragrance_name: MyString
+  brand: MyString
+  occasion: MyString
+  strength: 1
+  notes: MyText
+  worn_on: 2026-03-31
