@@ -1,5 +1,6 @@
 class EntriesController < ApplicationController
   def index
+    @entries = Entry.order(worn_on: :desc)
   end
 
   def new
