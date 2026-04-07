@@ -90,6 +90,7 @@ production:
     database: my_app_production
     username: my_app
     password: <%= ENV["MY_APP_DATABASE_PASSWORD"] %>
+    url: <%= ENV['DATABASE_URL'] %>
   cache:
     <<: *primary_production
     database: my_app_production_cache
