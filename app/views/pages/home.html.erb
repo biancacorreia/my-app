@@ -1,2 +1,83 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Welcome back!</h1>
+    <p class="page-subtitle">Ready to log today's fragrance?</p>
+  </div>
+  <%= link_to "+ Add Entry", new_entry_path, class: "btn btn-primary" %>
+</div>
+
+<!-- Stats Cards -->
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-content">
+      <p class="stat-label">Fragrances This Week</p>
+      <p class="stat-value"><%= @fragrances_this_week %></p>
+    </div>
+    <div class="stat-icon">✦</div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-content">
+      <p class="stat-label">Favourite Occasion</p>
+      <p class="stat-value bold"><%= @favorite_occasion %></p>
+    </div>
+    <div class="stat-icon">📅</div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-content">
+      <p class="stat-label">Avg Strength</p>
+      <p class="stat-value"><%= @avg_strength %></p>
+    </div>
+    <div class="stat-icon">↗</div>
+  </div>
+</div>
+
+<!-- Recent Entries -->
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Recent Entries</h2>
+    <%= link_to "View All", entries_path, class: "btn btn-outline" %>
+  </div>
+
+  <% if @recent_entries.any? %>
+    <div class="entries-list">
+      <% @recent_entries.each do |entry| %>
+        <div class="entry-row">
+          <div class="entry-info">
+            <p class="entry-name"><%= entry.fragrance_name %></p>
+            <p class="entry-meta">
+              <%= entry.worn_on.strftime("%Y-%m-%d") %>
+              <% if entry.occasion.present? %>
+                <span class="dot">•</span> <%= entry.occasion %>
+              <% end %>
+            </p>
+          </div>
+          <div class="entry-strength">
+            <p class="strength-label">Strength</p>
+            <p class="strength-value"><%= entry.strength %>/10</p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="empty-state">
+      <p>No entries yet. <%= link_to "Add your first fragrance!", new_entry_path %></p>
+    </div>
+  <% end %>
+</div>
+
+<!-- Bottom Cards -->
+<div class="bottom-grid">
+  <div class="card bottom-card">
+    <div class="bottom-card-icon">↗</div>
+    <p class="bottom-card-label">Strength Trends</p>
+    <%= link_to "View Analytics", analytics_path, class: "btn btn-outline btn-sm" %>
+  </div>
+
+  <div class="card bottom-card">
+    <div class="bottom-card-icon">📅</div>
+    <p class="bottom-card-label">Occasion History</p>
+    <%= link_to "View History", entries_path, class: "btn btn-outline btn-sm" %>
+  </div>
+</div>
