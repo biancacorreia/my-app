@@ -1,2 +1,10 @@
-<h1>Entries#new</h1>
-<p>Find me in app/views/entries/new.html.erb</p>
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Add Entry</h1>
+    <p class="page-subtitle">Log a new fragrance</p>
+  </div>
+</div>
+
+<div class="card form-card">
+  <%= render "form", entry: @entry %>
+</div>
