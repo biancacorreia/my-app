@@ -14,8 +14,8 @@ class PagesController < ApplicationController
                                   .group(:occasion)
                                   .average(:strength)
                                   .transform_values { |v| v.round(1) }
-    @entries_by_month = Entry.group("strftime('%Y-%m', worn_on)")
-                              .order("strftime('%Y-%m', worn_on)")
+    @entries_by_month = Entry.group(Arel.sql("TO_CHAR(worn_on, 'YYYY-MM')"))
+                              .order(Arel.sql("TO_CHAR(worn_on, 'YYYY-MM')"))
                               .count
   end
 end
