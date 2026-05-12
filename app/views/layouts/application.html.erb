@@ -23,6 +23,10 @@
         <%= link_to "History", entries_path, class: "nav-link #{current_page?(entries_path) ? 'active' : ''}" %>
         <%= link_to "Analytics", analytics_path, class: "nav-link #{current_page?(analytics_path) ? 'active' : ''}" %>
         <span class="nav-link settings-icon">⚙</span>
+        <div class="nav-auth">
+          <%= link_to "Sign Up", sign_up_path, class: "nav-link btn-auth btn-signup" %>
+          <%= link_to "Log In", log_in_path, class: "nav-link btn-auth btn-login" %>
+        </div>
       </div>
     </nav>
 
