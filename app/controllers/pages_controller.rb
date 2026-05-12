@@ -1,5 +1,14 @@
 class PagesController < ApplicationController
   def home
+    # Show landing page for guests, dashboard for logged-in users
+    if user_logged_in?
+      dashboard
+    else
+      render :landing
+    end
+  end
+
+  def dashboard
     @recent_entries = Entry.recent.limit(5)
     @fragrances_this_week = Entry.this_week.count
     @favorite_occasion = Entry.favorite_occasion || "N/A"
@@ -17,5 +26,11 @@ class PagesController < ApplicationController
     @entries_by_month = Entry.group(Arel.sql("TO_CHAR(worn_on, 'YYYY-MM')"))
                               .order(Arel.sql("TO_CHAR(worn_on, 'YYYY-MM')"))
                               .count
+  end
+
+  private
+
+  def user_logged_in?
+    false # TODO: Implement actual authentication check
   end
 end
